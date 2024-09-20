@@ -139,3 +139,4 @@ C:\Users\test\OneDrive\Desktop\c# Jet\API06.App\API06.App\bin\Debug\net8.0\Fluen
 C:\Users\test\OneDrive\Desktop\c# Jet\API06.App\API06.App\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
 C:\Users\test\OneDrive\Desktop\c# Jet\API06.App\API06.App\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\test\OneDrive\Desktop\c# Jet\API06.App\API06.App\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\test\OneDrive\Desktop\c# Jet\API06.App\API06.App\obj\Debug\net8.0\API06.App.sourcelink.json

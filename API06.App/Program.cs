@@ -1,6 +1,9 @@
 using API06.App.Context;
 using API06.App.DTOs.Category;
+using API06.App.Entities;
 using API06.App.Mapping;
+using API06.App.Repositories.Abstractions;
+using API06.App.Repositories.Concretes;
 using API06.App.Validations.Category;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -12,9 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();
 builder.Services.AddValidatorsFromAssemblyContaining<CategoryPostDTOValidation>().AddFluentValidationClientsideAdapters();
-// builder.Services.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CategoryPostDtoValidation>());
+//builder.Services.AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<CategoryPostDtoValidation>());
 builder.Services.AddAutoMapper(typeof(CategoryMap));
-
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
 

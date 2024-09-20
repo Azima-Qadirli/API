@@ -1,7 +1,11 @@
+using System.Linq.Expressions;
 using System.Net;
 using API06.App.Context;
 using API06.App.DTOs.Category;
 using API06.App.Entities;
+using API06.App.Repositories;
+using API06.App.Repositories.Abstractions;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,18 +14,20 @@ namespace API06.App.Controllers;
 [ApiController]
 public class CategoriesController : ControllerBase
 {
-private readonly AppDbContext _context;
+    private readonly ICategoryRepository _categoryRepository;
+    private readonly IMapper _mapper;
 
-public CategoriesController(AppDbContext context)
+public CategoriesController( IMapper mapper, ICategoryRepository categoryRepository)
 {
-    _context = context;
+    _mapper = mapper;
+    _categoryRepository = categoryRepository;
 }
 [HttpPost]
 public async Task<IActionResult> Create([FromBody]CategoryPostDto dto)
 {
-        Category category = Map(dto);   
-        await _context.Categories.AddAsync(category);
-        await _context.SaveChangesAsync();
+        Category category =_mapper.Map<Category>(dto);   
+        await _categoryRepository.AddAsync(category);
+        await _categoryRepository.SaveAsync();
         return StatusCode(201);
     
     }
@@ -29,7 +35,7 @@ public async Task<IActionResult> Create([FromBody]CategoryPostDto dto)
     public async Task<IActionResult> GetAll()
     {
         //var categories= await _context.Categories.ToListAsync();
-       var categories = _context.Categories.AsQueryable();
+       var categories = _categoryRepository.GetAll(x=>!x.IsDeleted);
        List<CategoryGetDTO>dtos = new List<CategoryGetDTO>();
        dtos = await categories.Select(c=>new CategoryGetDTO{Name=c.Name,Id=c.Id}).ToListAsync();
         return Ok(dtos);
@@ -37,43 +43,37 @@ public async Task<IActionResult> Create([FromBody]CategoryPostDto dto)
 [HttpGet("category/{id}")]
     public async Task<IActionResult> GetById(Guid id)
     {
-     var category = await _context.Categories.FirstOrDefaultAsync(c=>c.Id == id);
+     var category = await _categoryRepository.GetAsync(x=>!x.IsDeleted && x.Id == id);
      if (category == null)
      {
-         return StatusCode(404,new { message =$"{category} is not found" });
+         return StatusCode(404,new { message =$"Item is not found" });
      }
-     return StatusCode(200, category);
+     CategoryGetDTO dto = _mapper.Map<CategoryGetDTO>(category);
+     return StatusCode(200, dto);
      // var category = await _context.Categories.FindAsync(id);
     // var catgory = await _context.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();
     }
-[HttpDelete("category/{id}")]
+[HttpDelete("{id}")]
     public async Task<IActionResult> Remove(Guid id)
     {
-        var category = await _context.Categories.FirstOrDefaultAsync(c=>c.Id == id);
+        var category = await _categoryRepository.GetAsync(x=>!x.IsDeleted && x.Id == id);
         if (category == null)
-            return StatusCode(404,new { message =$"{category} is not found" });
-        _context.Categories.Remove(category);
-        await _context.SaveChangesAsync();
+            return StatusCode(404,new { message =$"Item is not found" });
+        category.IsDeleted = true;
+        await _categoryRepository.SaveAsync();
         return StatusCode(204);
         
     }
 [HttpPut("category/{id}")]
-    public async Task<IActionResult> Update(Guid id, Category category)
+    public async Task<IActionResult> Update(Guid id, CategoryPutDto dto)
     {
-        var updatedCategory = await _context.Categories.FirstOrDefaultAsync(c=>c.Id == id);
+        var updatedCategory = await _categoryRepository.GetAsync(x=>!x.IsDeleted && x.Id == id);
         if (updatedCategory == null)
-            return StatusCode(404,new { message =$"{category} is not found" });
-        updatedCategory.Name = category.Name;
-        await _context.SaveChangesAsync();
+            return StatusCode(404,new { message =$"Item is not found" });
+        updatedCategory.Name = dto.Name;
+        await _categoryRepository.SaveAsync();
         return StatusCode(204);
     }
 
-    private Category Map(CategoryPostDto dto)
-    {
-        Category category = new Category()
-        {
-            Name = dto.Name
-        };
-        return category;
-    }
+    
 }
