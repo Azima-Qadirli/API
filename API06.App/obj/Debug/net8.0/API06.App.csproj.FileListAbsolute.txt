@@ -146,3 +146,4 @@ C:\Users\test\OneDrive\Desktop\c# Jet\API06.App\API06.App\obj\Debug\net8.0\refin
 C:\Users\test\OneDrive\Desktop\c# Jet\API06.App\API06.App\obj\Debug\net8.0\API06.App.pdb
 C:\Users\test\OneDrive\Desktop\c# Jet\API06.App\API06.App\obj\Debug\net8.0\API06.App.genruntimeconfig.cache
 C:\Users\test\OneDrive\Desktop\c# Jet\API06.App\API06.App\obj\Debug\net8.0\ref\API06.App.dll
+C:\Users\test\OneDrive\Desktop\c# Jet\API06.App\API06.App\bin\Debug\net8.0\API06.App.staticwebassets.runtime.json

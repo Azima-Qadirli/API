@@ -19,4 +19,8 @@
       <ProjectReference Include="..\API06.Service\API06.Service.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\assets\img\product\" />
+    </ItemGroup>
+
 </Project>

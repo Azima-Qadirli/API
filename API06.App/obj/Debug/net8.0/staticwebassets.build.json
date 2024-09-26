@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "1z63EPiJY9IHaAmU7vKcsdRspdQv0UH9h7cz0IYoDac=",
+  "Hash": "p8ygNjdpyvAeYdiKmAZ7NUpTERi/Ou9OXr/7XiZWols=",
   "Source": "API06.App",
   "BasePath": "_content/API06.App",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "API06.App\\wwwroot",
+      "Source": "API06.App",
+      "ContentRoot": "C:\\Users\\test\\OneDrive\\Desktop\\c# Jet\\API06.App\\API06.App\\wwwroot\\",
+      "BasePath": "_content/API06.App",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }
