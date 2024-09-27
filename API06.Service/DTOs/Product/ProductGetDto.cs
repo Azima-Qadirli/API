@@ -2,6 +2,7 @@ namespace API06.Service.DTOs.Product;
 
 public record ProductGetDto
 {
+    public Guid Id { get; set; }
     public string Name {  get; set; }
     public string Description { get; set; }
     public double Price { get; set; }

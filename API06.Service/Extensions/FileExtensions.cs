@@ -26,4 +26,14 @@ public static class FileExtensions
         return filename;
     }
 
+    public static  void RemoveFile(this IFormFile file ,string root, string path, string filename)
+    {
+        var fullpath = Path.Combine(root, path, file.FileName);
+        if (File.Exists(fullpath))
+        {
+            File.Delete(fullpath);
+        }
+       
+    }
+
 }

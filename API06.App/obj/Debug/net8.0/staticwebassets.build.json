@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "p8ygNjdpyvAeYdiKmAZ7NUpTERi/Ou9OXr/7XiZWols=",
+  "Hash": "FEJd4DL+x18JI4io9a/nddGnWL5yfA7FlYqELgIbqq4=",
   "Source": "API06.App",
   "BasePath": "_content/API06.App",
   "Mode": "Default",
@@ -15,5 +15,25 @@
       "Pattern": "**"
     }
   ],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\test\\OneDrive\\Desktop\\c# Jet\\API06.App\\API06.App\\wwwroot\\assets\\img\\product\\b07de6a2-09e4-4681-81b9-819cf344da712024-AMG-CLE-COUPE-CH-DR.webp",
+      "SourceId": "API06.App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\test\\OneDrive\\Desktop\\c# Jet\\API06.App\\API06.App\\wwwroot\\",
+      "BasePath": "_content/API06.App",
+      "RelativePath": "assets/img/product/b07de6a2-09e4-4681-81b9-819cf344da712024-AMG-CLE-COUPE-CH-DR.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\product\\b07de6a2-09e4-4681-81b9-819cf344da712024-AMG-CLE-COUPE-CH-DR.webp"
+    }
+  ]
 }
