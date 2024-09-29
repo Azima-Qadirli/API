@@ -12,7 +12,9 @@ using API06.Data.Context;
 using API06.Service.Services.AbstractServices;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +37,37 @@ builder.Services.AddScoped<IProductServices, ProductService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
+builder.Services.Configure<IdentityOptions>(opt =>
+{
+    //password
+opt.Password.RequiredUniqueChars = 1;
+opt.Password.RequireUppercase = true;
+opt.Password.RequireLowercase = true;
+opt.Password.RequiredLength = 6;
+opt.Password.RequireNonAlphanumeric = true;
+
+//lockout
+opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+opt.Lockout.MaxFailedAccessAttempts = 3;
+opt.Lockout.AllowedForNewUsers = true;
+
+//user
+opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+opt.User.RequireUniqueEmail = false;
+
+
+
+});
+
+
+
+
+
+
+
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
@@ -62,6 +95,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseStaticFiles();
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization(); 
 app.MapControllers();
 app.UseCors("api06");

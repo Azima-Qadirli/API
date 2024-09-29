@@ -12,7 +12,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace API06.App.Controllers;
+namespace API06.App.Client;
 [Route("api/[controller]")]
 [ApiController]
 public class CategoriesController : ControllerBase
@@ -27,12 +27,7 @@ public class CategoriesController : ControllerBase
     }
 
 
-    [HttpPost]
-public async Task<IActionResult> Create([FromBody]CategoryPostDto dto)
-{
-   var res = await _categoryServices.Create(dto);
-    return StatusCode(res.StatusCode);
-}
+
 [HttpGet("category/getall")]
     public async Task<IActionResult> GetAll()
     {
@@ -45,19 +40,7 @@ public async Task<IActionResult> Create([FromBody]CategoryPostDto dto)
      var res = await _categoryServices.GetById(id);
      return StatusCode(res.StatusCode, res.Data);
     }
-[HttpDelete("{id}")]
-    public async Task<IActionResult> Remove(Guid id)
-    {
-        var res = await _categoryServices.Remove(id);
-        return StatusCode(res.StatusCode);
-        
-    }
-[HttpPut("category/{id}")]
-    public async Task<IActionResult> Update(Guid id, CategoryPutDto dto)
-    {
-        var res = await _categoryServices.Update(id,dto);
-        return StatusCode(res.StatusCode,res.Message);
-    }
+
 
     
 }
