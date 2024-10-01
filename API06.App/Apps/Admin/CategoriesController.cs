@@ -9,12 +9,16 @@ using API06.Core.Repositories.Abstractions;
 using API06.Service.DTOs.Category;
 using API06.Service.Services.AbstractServices;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API06.App.Admin;
-[Route("api/admin/[controller]")]
+[Authorize(Roles="Admin,SuperAdmin")]
 [ApiController]
+[Route("api/admin/[controller]")]
+
+
 public class CategoriesController : ControllerBase
 {
     // private readonly ICategoryRepository _categoryRepository;

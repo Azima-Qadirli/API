@@ -1,9 +1,12 @@
 using API06.Service.DTOs.Product;
 using API06.Service.Services.AbstractServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace API06.App.Admin;
-[Route("/api/admin/[controller]")]
 [ApiController]
+[Authorize(Roles="Admin,SuperAdmin")]
+[Route("/api/admin/[controller]")]
+
 public class ProductController : ControllerBase
 {
     
