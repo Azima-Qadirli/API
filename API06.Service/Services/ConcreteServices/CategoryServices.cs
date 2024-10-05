@@ -20,9 +20,10 @@ public class CategoryServices:ICategoryServices
         _mapper = mapper;
     }
 
+
     public async Task<ApiResponse> Create(CategoryPostDto dto)
     {
-        Category category =_mapper.Map<Category>(dto);   
+        Category category =_mapper.Map<Category>(dto);  
         await _categoryRepository.AddAsync(category);
         await _categoryRepository.SaveAsync();
         return new  ApiResponse{StatusCode = 201};

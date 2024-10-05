@@ -7,5 +7,5 @@ namespace API06.Core.Repositories.Abstractions;
 
 public interface ICategoryRepository: IRepository<Category>
 {
-    
+   
 }

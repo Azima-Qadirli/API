@@ -3,8 +3,9 @@ using API06.Service.Services.AbstractServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace API06.App.Admin;
-[ApiController]
 [Authorize(Roles="Admin,SuperAdmin")]
+[ApiController]
+
 [Route("/api/admin/[controller]")]
 
 public class ProductController : ControllerBase
