@@ -1,4 +1,5 @@
 using System.Text;
+using API06.App.Extensions;
 using API06.Data.Context;
 using API06.App.Mapping;
 using API06.Core.Repositories.Abstractions;
@@ -88,6 +89,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.ConfigureException();
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseAuthentication();

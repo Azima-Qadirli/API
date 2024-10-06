@@ -2,6 +2,7 @@ using API06.Service.ApiResponses;
 using API06.Service.DTOs.Category;
 using API06.App.Entities;
 using API06.Core.Repositories.Abstractions;
+using API06.Service.Exceptions;
 using API06.Service.Services.AbstractServices;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -42,7 +43,8 @@ public class CategoryServices:ICategoryServices
         var category = await _categoryRepository.GetAsync(x=>!x.IsDeleted && x.Id == id);
         if (category == null)
         {
-            return new ApiResponse{StatusCode = 404,Message = "Item is not found"};
+            // return new ApiResponse{StatusCode = 404,Message = "Item is not found"};
+            throw new ItemNotFoundException("Item is not found");
         }
         CategoryGetDTO dto = _mapper.Map<CategoryGetDTO>(category);
         return new ApiResponse{StatusCode = 200,Data=dto};

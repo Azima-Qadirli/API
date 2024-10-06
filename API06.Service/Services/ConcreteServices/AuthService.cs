@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using API06.Service.ApiResponses;
 using API06.Service.DTOs.Auths;
+using API06.Service.Exceptions;
 using API06.Service.Services.AbstractServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -27,7 +28,8 @@ public class AuthService:IAuthService
     {
         var userExists = await _userManager.FindByNameAsync(dto.Username);
         if (userExists == null)
-            return new ApiResponse { StatusCode = 404, Message = "user not found." };
+            // return new ApiResponse { StatusCode = 404, Message = "user not found." };
+            throw new UserNotFoundException("User is not found");
         var loggedId = await _userManager.CheckPasswordAsync(userExists, dto.Password);
             
         var userRoles = await _userManager.GetRolesAsync(userExists);
